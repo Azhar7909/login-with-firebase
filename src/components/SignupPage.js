@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function SignupPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const  handleSubmit = (event) =>{
+    event.preventDefault()
+    console.log(email,password);
+  }
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -13,6 +19,7 @@ export default function SignupPage() {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            onChange={(ev)=>setEmail(ev.target.value)}
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -26,6 +33,7 @@ export default function SignupPage() {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
+            onChange={(ev)=>setPassword(ev.target.value)}
           />
         </div>
         <button type="submit" className="btn btn-primary">
