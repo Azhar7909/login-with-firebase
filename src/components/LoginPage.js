@@ -1,12 +1,26 @@
 import React, { useState } from "react";
+import fire from '../auth/FireBaseAuth'
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
+  // firebase 
   const  handleSubmit = (event) =>{
     event.preventDefault()
     console.log(email,password);
+    fire.auth().signInWithEmailAndPassword(email,password).then(()=>{
+      alert("Login success")
+    }).catch((error)=>{
+      alert("No user exist | ",error);
+    })
   }
+
+  const Logout = ()=>{
+    fire.auth().signOut();
+    alert("Log out Successfully")
+  }
+
+  
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -40,6 +54,9 @@ export default function LoginPage() {
           Login
         </button>
       </form>
+      <button onClick={Logout} type="button" style={{marginTop:"10px"}} className="btn btn-primary">
+          Log Out
+        </button>
     </div>
   );
 }

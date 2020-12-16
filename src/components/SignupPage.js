@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import fire from "../auth/FireBaseAuth";
+
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -6,6 +8,13 @@ export default function SignupPage() {
   const  handleSubmit = (event) =>{
     event.preventDefault()
     console.log(email,password);
+    // Firebase
+    fire.auth().createUserWithEmailAndPassword(email,password)
+    .then(()=>{
+      alert("User Created")
+    }).catch(()=>{
+      alert("Error Occured or user not created")
+    })
   }
   return (
     <div>
